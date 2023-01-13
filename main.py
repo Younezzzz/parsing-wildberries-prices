@@ -3,12 +3,11 @@ import gspread
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import time
-from bs4 import BeautifulSoup as bs
 import os
 
 
-gc = gspread.service_account(filename='pythonsheets-367612-2d8e45d9adb9.json')
-sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1mBfEMbmcferp3UIc4IjKcw4AU-KE1dX_yaB9YBxMU_I/edit#gid=0')
+gc = gspread.service_account('json файл, нужно скачать когда будете создавать API для работы с гугл таблицами')
+sh = gc.open_by_url('Ссылка на таблицу куда будут загружаться данные')
 worksheet = sh.worksheet('Лист1')
 
 
@@ -34,7 +33,7 @@ def update_gs(row):
     worksheet.update_cell(row+1,1,name.text.strip())
     worksheet.update_cell(row+1,2,price.text.strip())
     html.close()
-    # os.remove('wb_html.html')
+    os.remove('wb_html.html')
 
 for i in range(len(urls)):
     try:
